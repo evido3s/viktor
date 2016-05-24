@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Viktor - 数据中心信息{% endblock %}
+
+
+{% block page_content %}
+{% if current_user.admin() %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-6">
+    </br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        数据中心详细信息
+      </div>
+      <div class="panel-body">
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
+  </div
+</div>
+{% endif %}
+{% endblock %}

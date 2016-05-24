@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Viktor - 编辑资料{% endblock %}
+
+{% block page_content %}
+    {% if current_user.is_authenticated %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-6">
+        </br>
+        </div>
+    </div>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            编辑资料
+        </div>
+        <div class="panel-body">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+</div
+</div>
+    {% endif %}
+{% endblock %}

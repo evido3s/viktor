@@ -6,6 +6,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 
 class Registrations(db.Model):
@@ -65,8 +66,7 @@ class User(UserMixin, db.Model):
                      username=forgery_py.internet.user_name(True),
                      password=forgery_py.lorem_ipsum.word(),
                      realname=forgery_py.name.full_name(),
-                     mobile=forgery_py.lorem_ipsum.sentences(randint(1, 20)),
-                     member_since=forgery_py.date.date(True))
+                     mobile=forgery_py.lorem_ipsum.sentences(randint(1, 20)))
             db.session.add(u)
             try:
                 db.session.commit()
@@ -144,8 +144,6 @@ class Hosts(db.Model):
     mem = db.Column(db.Integer, nullable=False)
     disk = db.Column(db.Integer, nullable=True, default=0)
     create_time = db.Column(db.DateTime(), nullable=True)
-    cloud = db.Column(db.Boolean(), default=False)
-    price = db.Column(db.Float, default=0)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable=True)
     idc_id = db.Column(db.Integer, db.ForeignKey('idc.id'))
     owned = db.relationship('User',
@@ -176,6 +174,7 @@ class Hosts(db.Model):
                       cpu=randint(1, 8),
                       mem=randint(1, 32),
                       disk=randint(0, 5000),
+                      create_time=datetime.now(),
                       idc_id=randint(1, 3),
                       group_id=randint(1, 5))
             db.session.add(h)

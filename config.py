@@ -34,7 +34,7 @@ class DevelopmentConfig(Config):
     #  CELERY_BROKER_URL = 'redis://{0}:{1}/0'.format(REDIS_HOST, REDIS_PORT)
     #  CELERY_RESULT_BACKEND = 'redis://{0}:{1}/0'.format(REDIS_HOST, REDIS_PORT)
 
-    MYSQL_HOST = os.getenv('MYSQL_HOST', '172.16.0.35')
+    MYSQL_HOST = os.getenv('MYSQL_HOST', '10.100.2.42')
     MYSQL_PORT = os.getenv('MYSQL_PORT', '3306')
     MYSQL_USER = os.getenv('MYSQL_USER', 'viktor')
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD', 'viktor')

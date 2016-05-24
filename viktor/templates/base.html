@@ -1,46 +1,193 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Viktor{% endblock %}
+  <head>
+    {% block head %}
 
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-{% endblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle"
-                            data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ url_for('main.index') }}">Virtor</a>
+    <title>{% block title %}Viktor{% endblock %}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/static/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="/static/dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="/static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/static/bower_components/datatables-responsive/css/responsive.dataTables.scss">
+
+    <!-- Morris Charts CSS -->
+    <link href="/static/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block content %}
+    <div id="wrapper">
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('main.index') }}">Viktor</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+              <li><a href="{{ url_for('main.index') }}"> 首页</a></li>
+              {% if current_user.is_authenticated %}
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('main.index') }}">
+                      数据中心 <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="{{ url_for("main.idc") }}"><i class="fa fa-home fa-fw"></i> 数据中心列表</a>
+                      </li>
+                      {% if current_user.admin() %}
+                      <li><a href="{{ url_for("main.addidc") }}"><i class="fa fa-plus fa-fw"></i> 添加数据中心</a>
+                      </li>
+                      {% endif %}
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('main.index') }}">
+                      项目组 <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="{{ url_for("main.group") }}"><i class="fa fa-align-justify fa-fw"></i> 项目列表</a>
+                      </li>
+                      {% if current_user.admin() %}
+                      <li><a href="{{ url_for("main.addgroup") }}"><i class="fa fa-plus fa-fw"></i> 添加新项目组</a>
+                      </li>
+                      {% endif %}
+                  </ul>
+              </li>
+              {% if current_user.admin() %}
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('main.index') }}">
+                      主机 <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="{{ url_for("main.host") }}"><i class="fa fa-laptop fa-fw"></i> 主机列表</a>
+                      </li>
+                      <li><a href="{{ url_for("main.addhost") }}"><i class="fa fa-plus fa-fw"></i> 添加主机</a>
+                      </li>
+                  </ul>
+              </li>
+              {% else %}
+              <li><a href="{{ url_for("auth.normaluserbind") }}"><i class="fa fa-laptop fa-fw"></i> 拥有的主机</a>
+              {% endif %}
+              {% if current_user.admin() %}
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('main.index') }}">
+                      用户 <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="{{ url_for("auth.users") }}"><i class="fa fa-users fa-fw"></i> 用户列表</a>
+                      </li>
+                      <li><a href="{{ url_for("auth.add_user") }}"><i class="fa fa-plus fa-fw"></i> 添加新用户</a>
+                      </li>
+                  </ul>
+              </li>
+              {% endif %}
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('main.index') }}">
+                      服务 <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="{{ url_for("auth.users") }}"><i class="fa fa-tasks fa-fw"></i> 服务列表</a>
+                      </li>
+                      <li><a href="{{ url_for("auth.users") }}"><i class="fa fa-list-ul fa-fw"></i> 任务列表</a>
+                      </li>
+                  </ul>
+              </li>
+              {% endif %}
+          </ul>
+          <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-user fa-fw"></i>
+                  {% if current_user.realname %}
+                  {{ current_user.realname }}
+                  {% else %}
+                  三只手
+                  {% endif %}
+                  <i class="fa fa-caret-down"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-user">
+                <li><a href="{{ url_for('main.user', username=current_user.username) }}"><i class="fa fa-user fa-fw"></i> 个人资料</a>
+                </li>
+                <li><a href="{{ url_for('auth.changepassword') }}"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% block page_content %}{% endblock %}
+      </div>
+
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-          <li><a href="{{ url_for('main.index') }}">首页</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="">资料</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-{% endblock %}
+    {% endblock %}
 
-{% block content %}
-<div class="content">
-  {% for message in get_flashed_messages() %}
-  <div class="alert alert-warning">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {{ message }}
-  </div>
-  {% endfor %}
 
-  {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
+    <!-- jQuery -->
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/static/bower_components/raphael/raphael-min.js"></script>
+    <script src="/static/bower_components/morrisjs/morris.min.js"></script>
+    <script src="/static/js/morris-data.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="/static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/dist/js/sb-admin-2.js"></script>
+
+  </body>
+
+</html>
