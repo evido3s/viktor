@@ -8,15 +8,15 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
-from config import config
-# from celery import Celery
+from config import config, Config
+from celery import Celery
 
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 mail = Mail()
 moment = Moment()
-# celery = Celery(__name__, backend=Config.CELERY_RESULT_BACKEND, broker=Config.CELERY_BROKER_URL)
+celery = Celery(__name__, backend=Config.CELERY_RESULT_BACKEND, broker=Config.CELERY_BROKER_URL)
 
 
 login_manager = LoginManager()
@@ -33,7 +33,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
-    # celery.conf.update(app.config)
+    celery.conf.update(app.config)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
@@ -41,7 +41,7 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    #  from .annie import viktor as annie_blueprint
-    #  app.register_blueprint(annie_blueprint)
+    from .service import service as service_blueprint
+    app.register_blueprint(service_blueprint, url_prefix='/task')
 
     return app

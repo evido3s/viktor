@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 
-from app import create_app, celery
+from viktor import create_app, celery
 
 
 app = create_app('default')

@@ -184,6 +184,19 @@ class Hosts(db.Model):
                 db.session.rollback()
 
 
+class Tasks(db.Model):
+    __tablename__ = 'tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    uuid = db.Column(db.String(64), unique=True, index=True, nullable=False)
+    task = db.Column(db.String(32), nullable=False)
+    time = db.Column(db.String(32), nullable=False)
+    objective = db.Column(db.String(32), nullable=False)
+    state = db.Column(db.String(32), nullable=False)
+
+    def __repr__(self):
+        return self.uuid
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))

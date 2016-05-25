@@ -18,6 +18,8 @@ class Config:
     SQLALCHEMY_POOL_RECYCLE = 2000
     FLASK_PER_PAGE = 20
 
+    CELERY_BROKER_URL = 'redis://172.16.10.1:6379/0'
+    CELERY_RESULT_BACKEND = 'redis://172.16.10.1:6379/0'
     CELERY_TASK_SERIALIZER = 'json'
     CELERY_TIMEZONE = 'Asia/Shanghai'
 
@@ -28,11 +30,6 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-
-    #  REDIS_HOST = os.getenv('REDIS_HOST', '172.16.0.35')
-    #  REDIS_PORT = os.getenv('REDIS_PORT', '6379')
-    #  CELERY_BROKER_URL = 'redis://{0}:{1}/0'.format(REDIS_HOST, REDIS_PORT)
-    #  CELERY_RESULT_BACKEND = 'redis://{0}:{1}/0'.format(REDIS_HOST, REDIS_PORT)
 
     MYSQL_HOST = os.getenv('MYSQL_HOST', '172.16.10.1')
     MYSQL_PORT = os.getenv('MYSQL_PORT', '3306')

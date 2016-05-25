@@ -2,7 +2,6 @@
 # encoding: utf-8
 
 
-import hashlib
 from flask import render_template, redirect, request,\
     url_for, flash, current_app, jsonify
 from flask.ext.login import login_user, logout_user, login_required, current_user
