@@ -3,7 +3,7 @@
 
 
 import paramiko
-from datatime import datetime
+from datetime import datetime
 
 
 def client(client, cmd):
