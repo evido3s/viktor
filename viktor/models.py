@@ -187,6 +187,7 @@ class Hosts(db.Model):
 class Tasks(db.Model):
     __tablename__ = 'tasks'
     id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(64), unique=True, index=True, nullable=False)
     uuid = db.Column(db.String(64), unique=True, index=True, nullable=False)
     task = db.Column(db.String(32), nullable=False)
     time = db.Column(db.String(32), nullable=False)

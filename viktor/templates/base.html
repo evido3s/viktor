@@ -114,18 +114,8 @@
                   </ul>
               </li>
               {% endif %}
-              <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('main.index') }}">
-                      服务 <i class="fa fa-caret-down"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-user">
-                      <li><a href="{{ url_for('service.Test') }}"><i class="fa fa-tasks fa-fw"></i> test</a>
-                      <li><a href="{{ url_for('service.Update') }}"><i class="fa fa-tasks fa-fw"></i> 升级服务</a>
-                      </li>
-                      <li><a href=""><i class="fa fa-list-ul fa-fw"></i> 任务列表</a>
-                      </li>
-                  </ul>
-              </li>
+              <li><a href="{{ url_for('service.se') }}"> 服务</a>
+              <li><a href=""> 任务</a>
               {% endif %}
           </ul>
           <ul class="nav navbar-top-links navbar-right">

@@ -2,16 +2,20 @@
 # encoding: utf-8
 
 
+import logging
 import paramiko
 from datetime import datetime
 
 
-def client(client, cmd):
-    session = client.get_transport().open_session()
+logger = logging.getLogger(__name__)
+
+
+def client(host, cmd):
+    session = host.get_transport().open_session()
     try:
         session.exec_command(cmd)
     except Exception, e:
-        "%s: %s" % (datetime.now(), e)
+        logger.exception("%s: %s" % (datetime.now(), e))
     exit_status = session.recv_exit_status()
     return exit_status == 0
 
@@ -29,7 +33,7 @@ def _exec(host, cmd, passwd=None, key_filename=None):
             look_for_keys=False,
         )
     except Exception, e:
-        "%s: %s | %s" % (datetime.now(), host, e)
+        logger.exception("%s: %s | %s" % (datetime.now(), host, e))
     else:
         clients[host] = client(ssh, cmd)
 
@@ -43,6 +47,6 @@ def Upload(host, src, dst, passwd=None, pkey=None):
         sftp = paramiko.SFTPClient.from_transport(scp)
         sftp.put(src, dst)
     except Exception, e:
-        "%s: %s | %s" % (datetime.now(), host, e)
+        logger.exception("%s: %s | %s" % (datetime.now(), host, e))
     finally:
         scp.close()

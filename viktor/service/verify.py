@@ -2,8 +2,11 @@
 # encoding: utf-8
 
 
+import os
 import re
 from .errors import IpError
+from .config import *
+from .. import db
 
 
 def JudgeIP(ip):
