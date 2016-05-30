@@ -11,12 +11,12 @@ logger = get_task_logger(__name__)
 
 
 @celery.task
-def _java(host, uri, passwd=None, key_filename=None):
+def _node(host, version, passwd=None, key_filename=None):
     if passwd is None and key_filename is None:
         return False
     try:
-        cmd = 'cd /tmp && wget -O jdk-linux-x64.rpm {link} && rpm -Uvh jdk-linux-x64.rpm && rm -rf jdk-linux-x64.rpm'.format( link=uri )
-        print cmd
+        cmd = 'curl https://raw.githubusercontent.com/creationix/nvm/v0.13.1/install.sh | bash && \
+nvm install %s' % version
         _exec(host, cmd, passwd, key_filename)
         return True
     except Exception, e:

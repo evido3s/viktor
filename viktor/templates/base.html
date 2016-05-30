@@ -99,7 +99,7 @@
                   </ul>
               </li>
               {% else %}
-              <li><a href="{{ url_for("auth.normaluserbind") }}"><i class="fa fa-laptop fa-fw"></i> 拥有的主机</a>
+              <li><a href="{{ url_for("auth.normaluserbind") }}"><i class="fa fa-laptop fa-fw"></i> 我的机器</a>
               {% endif %}
               {% if current_user.admin() %}
               <li class="dropdown">

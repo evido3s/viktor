@@ -3,7 +3,7 @@
 
 
 import os
-from flask import render_template, request, current_app, redirect, flash
+from flask import render_template, request, current_app, redirect
 from flask.ext.login import login_required, current_user
 from . import service
 from .config import *
@@ -39,8 +39,7 @@ def Update():
         key_pwd = os.path.join(BASEPATH, '.key')
         key_file = os.path.join(key_pwd, '%s' % str(current_user))
         if current_user.pri_key is None:
-            flash(u'没有使用中的密码或者私钥')
-            return render_template('service/update.html', hosts=hosts, pagination=pagination)
+            return redirect('service/update.html', hosts=hosts, pagination=pagination)
         else:
             with open(key_file, 'w') as f:
                 f.write(current_user.pri_key)
@@ -50,8 +49,8 @@ def Update():
                     r = _update.delay(h, passwd=None, key_filename=key_file)
                     stat = search(r)
                     tasks = Tasks(uuid = str(r),
-                                  user = str(current_user),
-                                  task = u'初始化',
+                                  tasktouser = current_user.realname,
+                                  task = 'UPDATE',
                                   time = str(datetime.now()),
                                   objective = h,
                                   state = stat)
@@ -64,8 +63,8 @@ def Update():
                 r = _update.delay(h, passwd=auth)
                 stat = search(r)
                 tasks = Tasks(uuid = str(r),
-                              user = str(current_user),
-                              task = u'初始化',
+                              tasktouser = current_user.realname,
+                              task = 'UPDATE',
                               time = str(datetime.now()),
                               objective = h,
                               state = stat)
@@ -73,7 +72,6 @@ def Update():
             return render_template('service/result.html')
 
 
-    os.remove(key_file)
     return render_template('service/update.html', hosts=hosts, pagination=pagination)
 
 
@@ -90,14 +88,12 @@ def Java():
     uri = request.form.get('uri', '')
 
     if uri == '':
-        flash(u'没有下载链接啊')
         return render_template('service/java.html', hosts=hosts, pagination=pagination)
 
     if auth == '':
         key_pwd = os.path.join(BASEPATH, '.key')
         key_file = os.path.join(key_pwd, '%s' % str(current_user))
         if current_user.pri_key is None:
-            flash(u'没有使用中的密码或者私钥')
             return render_template('service/java.html', hosts=hosts, pagination=pagination)
         else:
             with open(key_file, 'w') as f:
@@ -109,8 +105,8 @@ def Java():
                     r = _java.delay(h, uri, passwd=None, key_filename=key_file)
                     stat = search(r)
                     tasks = Tasks(uuid = str(r),
-                                  user = str(current_user),
-                                  task = u'初始化',
+                                  tasktouser = current_user.realname,
+                                  task = 'JAVA',
                                   time = str(datetime.now()),
                                   objective = h,
                                   state = stat)
@@ -123,8 +119,8 @@ def Java():
                 r = _java.delay(h, uri, passwd=auth)
                 stat = search(r)
                 tasks = Tasks(uuid = str(r),
-                              user = str(current_user),
-                              task = u'初始化',
+                              tasktouser = current_user.realname,
+                              task = 'JAVA',
                               time = str(datetime.now()),
                               objective = h,
                               state = stat)
@@ -132,7 +128,6 @@ def Java():
             return render_template('service/result.html')
 
 
-    os.remove(key_file)
     return render_template('service/java.html', hosts=hosts, pagination=pagination)
 
 

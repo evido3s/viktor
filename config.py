@@ -18,8 +18,8 @@ class Config:
     SQLALCHEMY_POOL_RECYCLE = 2000
     FLASK_PER_PAGE = 20
 
-    CELERY_BROKER_URL = 'redis://172.16.10.1:6379/0'
-    CELERY_RESULT_BACKEND = 'redis://172.16.10.1:6379/0'
+    CELERY_BROKER_URL = 'redis://192.168.99.226:6379/0'
+    CELERY_RESULT_BACKEND = 'redis://192.168.99.226:6379/0'
     CELERY_TASK_SERIALIZER = 'json'
     CELERY_TIMEZONE = 'Asia/Shanghai'
 
@@ -31,7 +31,7 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
 
-    MYSQL_HOST = os.getenv('MYSQL_HOST', '172.16.10.1')
+    MYSQL_HOST = os.getenv('MYSQL_HOST', '192.168.99.226')
     MYSQL_PORT = os.getenv('MYSQL_PORT', '3306')
     MYSQL_USER = os.getenv('MYSQL_USER', 'viktor')
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD', 'viktor')
