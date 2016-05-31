@@ -4,7 +4,7 @@
 
 import os
 from viktor import create_app, db
-from viktor.models import User
+from viktor.models import User, IDC, Groups, Hosts
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.moment import Moment
@@ -17,7 +17,7 @@ migrate = Migrate(app, db)
 
 
 def make_shell_context():
-    return dict(app=app, db=db, User=User)
+    return dict(app=app, db=db, User=User, IDC=IDC, Groups=Groups, Hosts=Hosts)
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 

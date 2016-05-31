@@ -13,7 +13,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-desktop fa-5x"></i>
+                        <i class="fa fa-linux fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">升级系统</div>
@@ -35,11 +35,11 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-tasks fa-5x"></i>
+                        <i class="fa fa-desktop fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">JAVA</div>
-                        <div>java environment.</div>
+                        <div>java环境的安装.</div>
                     </div>
                 </div>
             </div>
@@ -57,18 +57,18 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-shopping-cart fa-5x"></i>
+                        <i class="fa fa-laptop fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">Node</div>
-                        <div>New Orders!</div>
+                        <div>node环境的安装!</div>
                     </div>
                 </div>
             </div>
             <a href="#">
                 <div class="panel-footer">
                     <span class="pull-left">支持CentOS6，7</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <a href="{{ url_for('service.Node') }}"><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span></a>
                     <div class="clearfix"></div>
                 </div>
             </a>
@@ -82,18 +82,18 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-support fa-5x"></i>
+                        <i class="fa fa-flash fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">Nginx</div>
-                        <div>Support Tickets!</div>
+                        <div>Nginx环境的安装!</div>
                     </div>
                 </div>
             </div>
             <a href="#">
                 <div class="panel-footer">
                     <span class="pull-left">支持CentOS6，7</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <a href="{{ url_for('service.Nginx') }}"><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span></a>
                     <div class="clearfix"></div>
                 </div>
             </a>
@@ -104,18 +104,18 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-comments fa-5x"></i>
+                        <i class="fa fa-cubes fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">Redis</div>
-                        <div>New Comments!</div>
+                        <div>Redis环境的安装!</div>
                     </div>
                 </div>
             </div>
             <a href="#">
                 <div class="panel-footer">
                     <span class="pull-left">支持CentOS6，7</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <a href="{{ url_for('service.Redis') }}"><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span></a>
                     <div class="clearfix"></div>
                 </div>
             </a>
@@ -126,18 +126,18 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-tasks fa-5x"></i>
+                        <i class="fa fa-cube fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">Rabbitmq</div>
-                        <div>New Tasks!</div>
+                        <div>Rabbitmq消息队列!</div>
                     </div>
                 </div>
             </div>
             <a href="#">
                 <div class="panel-footer">
                     <span class="pull-left">支持CentOS6，7</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <a href="{{ url_for('service.Rabbitmq') }}"><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span></a>
                     <div class="clearfix"></div>
                 </div>
             </a>
@@ -151,18 +151,18 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-comments fa-5x"></i>
+                        <i class="fa fa-database fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">Mysql</div>
-                        <div>New Comments!</div>
+                        <div>MySQL数据库环境!</div>
                     </div>
                 </div>
             </div>
             <a href="#">
                 <div class="panel-footer">
                     <span class="pull-left">只支持CentOS7系列</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <a href="{{ url_for('service.Mysql') }}"><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span></a>
                     <div class="clearfix"></div>
                 </div>
             </a>
@@ -177,7 +177,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">文件传输</div>
-                        <div>New Comments!</div>
+                        <div>以后会支持的!</div>
                     </div>
                 </div>
             </div>

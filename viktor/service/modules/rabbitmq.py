@@ -11,7 +11,7 @@ logger = get_task_logger(__name__)
 
 
 @celery.task
-def _redis(host, passwd=None, key_filename=None):
+def _rabbitmq(host, passwd=None, key_filename=None):
     if passwd is None and key_filename is None:
         return False
     try:
