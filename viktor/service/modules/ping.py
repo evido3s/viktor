@@ -13,7 +13,7 @@ logger = get_task_logger(__name__)
 
 @celery.task
 def ping(host):
-    cmd = "ping -c 3 %s" % host
+    cmd = "ping -c 2 %s" % host
     args = shlex.split(cmd)
 
     try:

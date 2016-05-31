@@ -11,14 +11,14 @@ logger = get_task_logger(__name__)
 
 
 @celery.task
-def _node(host, passwd=None, key_filename=None):
+def _redis(host, passwd=None, key_filename=None):
     if passwd is None and key_filename is None:
         return False
     try:
-        #  cmd = 'curl https://raw.githubusercontent.com/creationix/nvm/v0.13.1/install.sh | bash && \
-#  nvm install %s' % version
-        cmd = 'yum install -y epel-release && yum install -y nodejs npm'
-        _exec(host, cmd, passwd, key_filename)
+        cmd1 = 'yum install -y epel-release'
+        cmd2 = "yum install -y rabbitmq-server && systemctl restart rabbitmq-server || service rabbitmq-server restart"
+        _exec(host, cmd1, passwd, key_filename)
+        _exec(host, cmd2, passwd, key_filename)
         return True
     except Exception, e:
         logger.exception(e)

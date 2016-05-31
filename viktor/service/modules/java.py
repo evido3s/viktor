@@ -16,7 +16,6 @@ def _java(host, uri, passwd=None, key_filename=None):
         return False
     try:
         cmd = 'cd /tmp && wget -O jdk-linux-x64.rpm {link} && rpm -Uvh jdk-linux-x64.rpm && rm -rf jdk-linux-x64.rpm'.format( link=uri )
-        print cmd
         _exec(host, cmd, passwd, key_filename)
         return True
     except Exception, e:

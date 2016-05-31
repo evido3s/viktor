@@ -23,6 +23,9 @@ class Config:
     CELERY_TASK_SERIALIZER = 'json'
     CELERY_TIMEZONE = 'Asia/Shanghai'
 
+    UPLOAD_FOLDER = '/tmp/'
+    ALLOWEN_EXTENSIONS = set(['gz', 'tgz', 'rpm', 'tar.gz', 'zip', 'src'])
+
     @staticmethod
     def init_app(app):
         pass
